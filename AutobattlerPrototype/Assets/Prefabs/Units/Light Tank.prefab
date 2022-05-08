@@ -19,10 +19,10 @@ MonoBehaviour:
   potentialTargets: []
   targetUnit: {fileID: 0}
   damage: 3
-  range: 30
+  range: 50
   fireRate: 4
   lastFired: 0
-  projectileSpeed: 10
+  projectileSpeed: 50
   weapon: {fileID: 8492015827460550831}
   weaponOpening: {fileID: 8874202286915992572}
   projectile: {fileID: 6184536220791937117, guid: c66707dce303f9747a50ab794ce1229d, type: 3}
@@ -38,7 +38,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 4.438386
-  m_Speed: 3.5
+  m_Speed: 10
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

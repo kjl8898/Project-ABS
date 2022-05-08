@@ -32,21 +32,13 @@ public class MobileCombatUnit : CombatUnit
 
     private void UpdateTargetPos()
     {
-        if(!hasTargetPos)
+        if (targetUnit != null)
         {
-            targetPosition = GetTestTarget();
-            agent.destination = targetPosition;
+            agent.destination = targetUnit.transform.position;
         }
-    }
-
-    private Vector3 GetTestTarget()
-    {
-        if (testTarget != null)
+        else
         {
-            hasTargetPos = true;
-            return testTarget.transform.position;
+            agent.destination = testTarget.transform.position;
         }
-
-        return Vector3.zero;
     }
 }

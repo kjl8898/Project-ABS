@@ -6,7 +6,7 @@ public class CombatUnit : Unit
 {
     // VARIABLES
     [SerializeField] private List<Unit> potentialTargets = new List<Unit>();
-    [SerializeField] private Unit targetUnit;
+    [SerializeField] protected Unit targetUnit;
 
     [SerializeField] private int damage;
     [SerializeField] private float range;
