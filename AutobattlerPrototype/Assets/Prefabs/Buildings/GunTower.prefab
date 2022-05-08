@@ -132,7 +132,7 @@ MonoBehaviour:
   range: 75
   fireRate: 2
   lastFired: 0
-  projectileSpeed: 50
+  projectileSpeed: 100
   weapon: {fileID: 2908175420919231915}
   weaponOpening: {fileID: 7670724489662190365}
   projectile: {fileID: 6184536220791937117, guid: c66707dce303f9747a50ab794ce1229d, type: 3}
