@@ -130,7 +130,7 @@ MonoBehaviour:
   targetUnit: {fileID: 0}
   damage: 4
   range: 75
-  fireRate: 2
+  fireRate: 0.5
   lastFired: 0
   projectileSpeed: 100
   isFiring: 0
