@@ -119,7 +119,6 @@ public class CombatUnit : Unit
 
     private void AimWeapon()
     {
-
         if(HasLineOfSight(targetUnit))
         {
             weapon.transform.LookAt(targetUnit.transform.position);
@@ -127,6 +126,7 @@ public class CombatUnit : Unit
         else
         {
             weapon.transform.localRotation = Quaternion.identity;
+            return;
         }
 
         // Fire if the weapon is pointed at the target Vector3(-34.7288475,2.29458666,-282.355774)
