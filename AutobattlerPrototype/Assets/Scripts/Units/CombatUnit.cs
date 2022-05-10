@@ -62,24 +62,24 @@ public class CombatUnit : Unit
             {
                 AimWeapon();
             }
+            return;
         }
 
         // Find a new unit in range
-        else if(targetUnit == null && FindClosestUnitInRange() != null)
+        if(targetUnit == null && FindClosestUnitInRange() != null)
         {
             if(HasLineOfSight(FindClosestUnitInRange()))
             {
                 targetUnit = FindClosestUnitInRange();
+                return;
             }
         }
-        else
-        {
-            weapon.transform.localRotation = Quaternion.identity;
 
-            if (isFiring)
-            {
-                isFiring = false;
-            }
+        weapon.transform.localRotation = Quaternion.identity;
+
+        if (isFiring)
+        {
+            isFiring = false;
         }
     }
 
