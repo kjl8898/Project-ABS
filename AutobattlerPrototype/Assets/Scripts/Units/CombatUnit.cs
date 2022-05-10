@@ -61,7 +61,10 @@ public class CombatUnit : Unit
         // Find a new unit in range
         else if(targetUnit == null && FindClosestUnitInRange() != null)
         {
-            targetUnit = FindClosestUnitInRange();
+            if(HasLineOfSight(FindClosestUnitInRange()))
+            {
+                targetUnit = FindClosestUnitInRange();
+            }
         }
         else
         {
@@ -101,21 +104,14 @@ public class CombatUnit : Unit
 
     private void AimWeapon()
     {
-        // Check if there is a clear line of sight on the target
-        RaycastHit lineOfSightHit;
-        Ray lineOfSightRay = new Ray(weapon.transform.position, targetUnit.transform.position - weapon.transform.position);
-        Debug.DrawRay(weapon.transform.position, targetUnit.transform.position - weapon.transform.position, Color.blue);
 
-        if (Physics.Raycast(lineOfSightRay, out lineOfSightHit))
+        if(HasLineOfSight(targetUnit))
         {
-            if (lineOfSightHit.collider.gameObject == targetUnit.gameObject)
-            {
-                weapon.transform.LookAt(targetUnit.transform.position);
-            }
-            else
-            {
-                weapon.transform.localRotation = Quaternion.identity;
-            }
+            weapon.transform.LookAt(targetUnit.transform.position);
+        }
+        else
+        {
+            weapon.transform.localRotation = Quaternion.identity;
         }
 
         // Fire if the weapon is pointed at the target Vector3(-34.7288475,2.29458666,-282.355774)
@@ -144,6 +140,24 @@ public class CombatUnit : Unit
             firedProjectile.MoveSpeed = projectileSpeed;
             lastFired = Time.time;
         }
+    }
+
+    private bool HasLineOfSight(Unit _unit)
+    {
+        // Check if there is a clear line of sight on the target
+        RaycastHit lineOfSightHit;
+        Ray lineOfSightRay = new Ray(weapon.transform.position, _unit.transform.position - weapon.transform.position);
+        Debug.DrawRay(weapon.transform.position, _unit.transform.position - weapon.transform.position, Color.blue);
+
+        if (Physics.Raycast(lineOfSightRay, out lineOfSightHit))
+        {
+            if (lineOfSightHit.collider.gameObject == _unit.gameObject)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void OnDrawGizmosSelected()
