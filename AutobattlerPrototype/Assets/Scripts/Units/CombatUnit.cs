@@ -13,10 +13,13 @@ public class CombatUnit : Unit
     [SerializeField] private float fireRate;
     [SerializeField] private float lastFired = 0;
     [SerializeField] private float projectileSpeed = 10;
+    [SerializeField] protected bool isFiring = false;
 
     [SerializeField] private GameObject weapon;
     [SerializeField] private GameObject weaponOpening;
     [SerializeField] private GameObject projectile;
+
+    LayerMask losMask;
 
 
     // PROPERTIES
@@ -30,6 +33,9 @@ public class CombatUnit : Unit
     public override void Start()
     {
         base.Start();
+
+        losMask = LayerMask.GetMask("Projectile");
+        losMask = ~losMask;
     }
 
     // Update is called once per frame
@@ -69,6 +75,11 @@ public class CombatUnit : Unit
         else
         {
             weapon.transform.localRotation = Quaternion.identity;
+
+            if (isFiring)
+            {
+                isFiring = false;
+            }
         }
     }
 
@@ -125,6 +136,11 @@ public class CombatUnit : Unit
             {
                 //Debug.Log(gameObject.name + " attempting to fire...");
                 FireWeapon();
+
+                if (!isFiring)
+                {
+                    isFiring = true;
+                }
             }
         }
     }
@@ -149,7 +165,7 @@ public class CombatUnit : Unit
         Ray lineOfSightRay = new Ray(weapon.transform.position, _unit.transform.position - weapon.transform.position);
         Debug.DrawRay(weapon.transform.position, _unit.transform.position - weapon.transform.position, Color.blue);
 
-        if (Physics.Raycast(lineOfSightRay, out lineOfSightHit))
+        if (Physics.Raycast(lineOfSightRay, out lineOfSightHit, range, losMask))
         {
             if (lineOfSightHit.collider.gameObject == _unit.gameObject)
             {

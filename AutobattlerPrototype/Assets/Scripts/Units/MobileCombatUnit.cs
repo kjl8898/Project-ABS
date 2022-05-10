@@ -13,6 +13,7 @@ public class MobileCombatUnit : CombatUnit
     private bool hasTargetPos = false; // Nothing would be this low in the map
     [SerializeField] Vector3 targetPosition = Vector3.zero;
     [SerializeField] GameObject testTarget;
+    [SerializeField] private float moveSpeed;
 
     // Start is called before the first frame update
     public override void Start()
@@ -20,6 +21,7 @@ public class MobileCombatUnit : CombatUnit
         base.Start();
 
         agent = GetComponent<NavMeshAgent>();
+        moveSpeed = agent.speed;
     }
 
     // Update is called once per frame
@@ -28,6 +30,15 @@ public class MobileCombatUnit : CombatUnit
         base.Update();
 
         UpdateTargetPos();
+
+        if(isFiring)
+        {
+            agent.speed = 0;
+        }
+        else
+        {
+            agent.speed = moveSpeed;
+        }
     }
 
     private void UpdateTargetPos()
