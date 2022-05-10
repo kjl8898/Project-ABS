@@ -21,6 +21,8 @@ public class CombatUnit : Unit
 
     LayerMask losMask;
 
+    [SerializeField] private bool drawLoSChecks = false;
+
 
     // PROPERTIES
     public List<Unit> PotentialTargets
@@ -132,7 +134,6 @@ public class CombatUnit : Unit
         // Fire if the weapon is pointed at the target Vector3(-34.7288475,2.29458666,-282.355774)
         RaycastHit aimingHit;
         Ray aimingRay = new Ray(weaponOpening.transform.position, weaponOpening.transform.TransformDirection(Vector3.forward));
-        Debug.DrawRay(weaponOpening.transform.position, weaponOpening.transform.TransformDirection(Vector3.forward), Color.red);
 
         if (Physics.Raycast(aimingRay, out aimingHit))
         {
@@ -167,7 +168,11 @@ public class CombatUnit : Unit
         // Check if there is a clear line of sight on the target
         RaycastHit lineOfSightHit;
         Ray lineOfSightRay = new Ray(weapon.transform.position, _unit.transform.position - weapon.transform.position);
-        Debug.DrawRay(weapon.transform.position, _unit.transform.position - weapon.transform.position, Color.blue);
+
+        if (drawLoSChecks)
+        {
+            Debug.DrawRay(weapon.transform.position, _unit.transform.position - weapon.transform.position, Color.blue);
+        }
 
         if (Physics.Raycast(lineOfSightRay, out lineOfSightHit, range, losMask))
         {
@@ -187,7 +192,11 @@ public class CombatUnit : Unit
 
     private void OnDrawGizmosSelected()
     {
+        // Unit Range
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, range);
+
+        // Weapon Direction
+        Debug.DrawRay(weaponOpening.transform.position, weaponOpening.transform.TransformDirection(Vector3.forward), Color.red);
     }
 }

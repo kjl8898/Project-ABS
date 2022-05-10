@@ -133,9 +133,11 @@ MonoBehaviour:
   fireRate: 2
   lastFired: 0
   projectileSpeed: 100
+  isFiring: 0
   weapon: {fileID: 2908175420919231915}
   weaponOpening: {fileID: 7670724489662190365}
   projectile: {fileID: 6184536220791937117, guid: c66707dce303f9747a50ab794ce1229d, type: 3}
+  drawLoSChecks: 0
 --- !u!1 &7670724489662190365
 GameObject:
   m_ObjectHideFlags: 0

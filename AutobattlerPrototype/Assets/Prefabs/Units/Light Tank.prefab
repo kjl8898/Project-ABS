@@ -23,11 +23,14 @@ MonoBehaviour:
   fireRate: 4
   lastFired: 0
   projectileSpeed: 50
+  isFiring: 0
   weapon: {fileID: 8492015827460550831}
   weaponOpening: {fileID: 8874202286915992572}
   projectile: {fileID: 6184536220791937117, guid: c66707dce303f9747a50ab794ce1229d, type: 3}
+  drawLoSChecks: 0
   targetPosition: {x: 0, y: 0, z: 0}
-  testTarget: {fileID: 0}
+  moveSpeed: 0
+  patrolLocations: []
 --- !u!195 &1524051690485928595
 NavMeshAgent:
   m_ObjectHideFlags: 0

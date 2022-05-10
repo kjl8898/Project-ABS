@@ -9,6 +9,7 @@ public class UnitManager : MonoBehaviour
     [SerializeField] private List<Unit> enemyUnits = new List<Unit>();
     [SerializeField] private List<Unit> allUnits = new List<Unit>();
     [SerializeField] private List<Unit> destroyedUnits = new List<Unit>();
+    [SerializeField] private List<Vector3> patrolLocations = new List<Vector3>();
 
     // PROPERTIES
     public List<Unit> PlayerUnits
@@ -43,6 +44,8 @@ public class UnitManager : MonoBehaviour
 
         UpdatePotentialTargets(true);
         UpdatePotentialTargets(false);
+
+        CollectPatrolLocations();
     }
 
     // Update is called once per frame
@@ -161,6 +164,29 @@ public class UnitManager : MonoBehaviour
             foreach(CombatUnit combatUnit in enemyUnits)
             {
                 combatUnit.PotentialTargets = playerUnits;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Find all objects tagged as PatrolLocations and distribute their locations to all mobile units.
+    /// </summary>
+    private void CollectPatrolLocations()
+    {
+        // Collect and update any units starting on the map
+        foreach (GameObject patrolLocationGO in GameObject.FindGameObjectsWithTag("PatrolLocation")) // Unity says I did a bad
+        {
+            Vector3 location = patrolLocationGO.transform.position;
+            patrolLocations.Add(location);
+        }
+
+        foreach(Unit unit in allUnits) // This could probably be better
+        {
+            MobileCombatUnit mobileCombatUnit = unit as MobileCombatUnit;
+
+            if(mobileCombatUnit != null)
+            {
+                mobileCombatUnit.PatrolLocations = patrolLocations;
             }
         }
     }

@@ -10,6 +10,7 @@ TagManager:
   - EnemyTarget
   - Unit
   - Terrain
+  - PatrolLocation
   layers:
   - Default
   - TransparentFX
