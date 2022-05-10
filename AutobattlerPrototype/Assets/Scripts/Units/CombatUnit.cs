@@ -171,6 +171,10 @@ public class CombatUnit : Unit
             {
                 return true;
             }
+            else if(lineOfSightHit.collider.gameObject.tag == "Unit")
+            {
+                targetUnit = null;
+            }
         }
 
         return false;
