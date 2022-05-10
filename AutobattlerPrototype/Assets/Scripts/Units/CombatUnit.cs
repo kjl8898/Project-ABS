@@ -101,12 +101,16 @@ public class CombatUnit : Unit
                 closestTarget = unit;
                 closestTargetDistance = Vector3.Distance(transform.position, unit.transform.position);
             }
-        }
 
-        // Is the target in range?
-        if(closestTargetDistance <= range)
-        {
-            return closestTarget;
+            // Is the target in range?
+            if (closestTargetDistance <= range)
+            {
+                if(HasLineOfSight(closestTarget))
+                {
+                    return closestTarget;
+
+                }
+            }
         }
 
 
@@ -171,7 +175,8 @@ public class CombatUnit : Unit
             {
                 return true;
             }
-            else if(lineOfSightHit.collider.gameObject.tag == "Unit")
+            else if(lineOfSightHit.collider.gameObject.tag == "Unit"
+                || lineOfSightHit.collider.gameObject.tag == "Terrain")
             {
                 targetUnit = null;
             }

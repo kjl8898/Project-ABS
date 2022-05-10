@@ -9,6 +9,7 @@ TagManager:
   - PlayerTarget
   - EnemyTarget
   - Unit
+  - Terrain
   layers:
   - Default
   - TransparentFX
